@@ -1,0 +1,14 @@
+/*Fix the warning below with
+🌟🌟 Two distinct solutions*/
+// Warning: unused variable: `x`
+
+fn main() {
+    let _x = 1;
+}
+
+fn _main1() {
+    let x = 1; 
+    println!("{x}");
+}
+
+
