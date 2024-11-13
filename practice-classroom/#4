@@ -1,4 +1,4 @@
-const RHOMBUS_SIZE: usize = 5;
+const RHOMBUS_SIZE: usize = 6;
 
 fn main() {
     let mut result = String::new(); 
