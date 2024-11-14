@@ -1,0 +1,40 @@
+use std::env;
+use std::fs::File;
+use std::io::{self, BufRead, Write};
+
+/*
+ * Complete the 'timeConversion' function below.
+ *
+ * The function is expected to return a STRING.
+ * The function accepts STRING s as parameter.
+ */
+
+fn timeConversion(s: &str) -> String {
+    let period = &s[8..]; // "AM" or "PM"
+    let hour = s[0..2].parse::<i32>().unwrap();
+    let minute = &s[3..5];
+    let second = &s[6..8];
+    
+    let hour_24 = match (period, hour) {
+        ("AM", 12) => 0,       // Convert 12 AM to 00
+        ("AM", _) => hour,     // Keep as is for other AM hours
+        ("PM", 12) => 12,      // Keep 12 PM as 12
+        ("PM", _) => hour + 12, // Convert PM hour to 24-hour format
+        _ => hour, // This wildcard covers any other cases (added to satisfy the compiler)
+    };
+
+    format!("{:02}:{:}:{:}", hour_24, minute, second)
+}
+
+fn main() {
+    let stdin = io::stdin();
+    let mut stdin_iterator = stdin.lock().lines();
+
+    let mut fptr = File::create(env::var("OUTPUT_PATH").unwrap()).unwrap();
+
+    let s = stdin_iterator.next().unwrap().unwrap();
+
+    let result = timeConversion(&s);
+
+    writeln!(&mut fptr, "{}", result).ok();
+}
