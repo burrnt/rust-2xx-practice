@@ -1,0 +1,27 @@
+fn invert_the_case(s: String) -> String {
+    s.chars()
+        .map(|c| {
+            if c.is_uppercase() {
+                c.to_lowercase().collect::<String>()
+            } else {
+                c.to_uppercase().collect::<String>()
+            }
+        })
+        .collect()
+}
+
+fn main() {
+    let test_cases = [
+    ("Hello world", "hELLO WORLD"),
+        ("Привіт світ", "пРИВІТ СВІТ"),
+    ];
+
+    for (input, expected_output) in test_cases.iter() {
+        let result = invert_the_case(input.to_string());
+        println!("Input: {}, Output: {}, Expected: {}", input, result, expected_output);
+
+        assert_eq!(result, *expected_output);
+    }
+
+    println!("All test cases passed!");
+}
